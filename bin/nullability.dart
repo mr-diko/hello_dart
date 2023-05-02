@@ -1,5 +1,3 @@
 void main(List<String> args) {
-  print()
+  print('hello');
 }
-
-bool 
