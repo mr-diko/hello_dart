@@ -1,4 +1,4 @@
-import 'package:hello_dart/math.dart';
+import 'package:hello_dart/math.dart' as math;
 
 void main(List<String> args) {
   print(math.max(1, 2));
