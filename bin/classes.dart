@@ -11,7 +11,6 @@ class User {
 
   @override
   String toString() {
-    // TODO: implement toString
     return 'User(id:$id, name:$name)';
   }
 

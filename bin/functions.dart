@@ -1,5 +1,3 @@
-import 'dart:math';
-
 void main(List<String> args) {}
 
 bool isNumberDivisible(int number, int divisor) {
