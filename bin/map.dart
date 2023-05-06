@@ -9,8 +9,16 @@ void main(List<String> args) {
 
   final userMap = userObject.toJson();
   final userString = jsonEncode(userMap);
+  dynamic jsonMap = jsonDecode(userString);
 
-  print(userString);
+  if (jsonMap is Map<String, dynamic>) {
+    print("You've got a map!");
+  } else {
+    print('Your JSON must have been in the wrong format.');
+  }
+  final userMarcia = User.fromJson(jsonMap);
+
+  print(userMarcia);
 }
 
 class User {
@@ -24,11 +32,38 @@ class User {
   final String name;
   final List<String> emails;
 
+  factory User.fromJson(Map<String, dynamic> jsonMap) {
+    dynamic id = jsonMap['id'];
+    if (id is! int) id = 0;
+
+    dynamic name = jsonMap['name'];
+    if (name is! String) name = '';
+
+    dynamic maybeEmails = jsonMap['emails'];
+    final emails = <String>[];
+    if (maybeEmails is List) {
+      for (dynamic email in maybeEmails) {
+        if (email is String) emails.add(email);
+      }
+    }
+
+    return User(
+      id: id,
+      name: name,
+      emails: emails,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
       'name': name,
       'emails': emails,
     };
+  }
+
+  @override
+  String toString() {
+    return 'User(id: $id, name: $name, emails: $emails)';
   }
 }
